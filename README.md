@@ -29,7 +29,7 @@ INSTALATION & CONFIGURATION
 ===========================
 This project was built against Python 3.11.3.
 It is suggested you create a vitrual environment using your preferred tooling e.g. uv.
-Install dependenies -> check [requirements.txt](https://github.com/sofiaisreis/NomadMinds/blob/master/requirements.txt)
+Install dependenies -> check [requirements.txt](/requirements.txt)
 
 
 TO RUN
@@ -89,7 +89,7 @@ WORKFLOW
 **trends_agent:**
 - Accesses the MCP server to gather trends, when user requests.
 
-Check the workflow's schema here.
+[Check the workflow's schema here.](/workflowschema.png)
 
 
 Example queries to run:
