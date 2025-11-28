@@ -15,19 +15,16 @@ Install dependenies -> check [requirements.txt](https://github.com/sofiaisreis/N
 
 TO RUN
 ======
-From the command line of the working directory execute the following command:
-```adk run travel_assistant```
-Running the Agent in ADK Web mode:
-```adk web --port 8000```
-To run with debug messages:
-```adk web --log_level DEBUG```
+- From the command line of the working directory execute the following command: ```adk run travel_assistant```
+- Running the Agent in ADK Web mode: ```adk web --port 8000```
+- To run with debug messages: ```adk web --log_level DEBUG```
 
 
 CONCEPTS USED
 =============
 - Multi-agent system: ParallelAgents + SequentialAgents + LoopAgents
-- Tools: AgentTool wrapping subagents
-- MCP server: Fetch (Web scrapping)
+- Tools: AgentTool and wrapping subagents
+- MCP server: Fetch (Web scraping)
 - Sessions: stateful agent using InMemorySessionService
 - Context engineering: placeholders {final_events_summary}, etc.
 - LLM-powered agents: all subagents use Gemini models
@@ -36,28 +33,28 @@ CONCEPTS USED
 PROJECT STRUCTURE
 =====================
 The project is organized as follows:
- - travel_assistant/: The main Python package for the agent.
+ - **travel_assistant/**: The main Python package for the agent.
      - agent.py: Defines the root_agent and the sub-agents orchestration
-     - events/: Contains the sub-agents responsible to gather the events summary
-         - events/research: reserchers of events
+     - **events/**: Contains the sub-agents responsible to gather the events summary
+         - **events/research**: reserchers of events
             - events_researcher_agent.py: Using google search, finds pieces of relevant events on the given place/city for each day the user is traveling.
             - summarizer_agent.py: Uses the outputkey from the researcher and creates a concise summary as a bulleted list.
-         - events/reviewers: reviewers of events
+         - **events/reviewers**: reviewers of events
             - events_critique_agent.py: A constructive travelling advisor critic that reviews the events suggestions proposal and marks it at APPROVED or not.
             - events_refiner_agent.py: A refiner that takes the proposal list of events and the respective critique about the choice of events, providing updated where needed.
          - events_pipeline_agent.py: Responsible to launch the pipeline of event gathering, summarization and to call the loop refiner agent.
-     - destination/: Contains the sub-agents responsible to gather the weather and travel tips
+     - **destination/**: Contains the sub-agents responsible to gather the weather and travel tips
         - destination_weather_agent.py: Uses the weather_tool (which fecthes from open APIs) to find how the weather on a given time, in a city.
-    - trends/: Finds the trends for the city
+    - **trends/**: Finds the trends for the city
         - trends_agent.py: Agent using Official MCP server to Fetch (Web Scraping)
 
 
 WORKFLOW
 ============
-root_agent:
+**root_agent:**
 - Orchestrates the workflow using tools to call a sequential agent (that provides all information on events, weather and tips summarized), and an agent that delivers trends.
 
-parallel_travel_assistant_team:
+**parallel_travel_assistant_team:**
 - Runs three subagents simultaneously:
     - events_pipeline_agent (Sequential: Research → Summarize -> Loop agent)
         - The Loop agent iterates through events_critique_agent and events_refiner_agent and if the content is good, it follows to the next step, otherwise we repeat the loop.
@@ -65,13 +62,15 @@ parallel_travel_assistant_team:
     - travel_tips_agent
 - Each subagent writes its output to the shared session context.
 
-aggregator_agent:
+**aggregator_agent:**
 - Runs after the parallel_travel_assistant_team completes.
 - Uses the outputs from all parallel subagents via {placeholder} syntax.
 - Generates a single executive summary.
 
-trends_agent:
+**trends_agent:**
 - Accesses the MCP server to gather trends, when user requests.
+
+Check the workflow's schema here.
 
 
 Example queries to run:
