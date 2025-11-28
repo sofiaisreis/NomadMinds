@@ -37,6 +37,7 @@ TO RUN
 - From the command line of the working directory execute the following command: ```adk run travel_assistant```
 - Running the Agent in ADK Web mode: ```adk web --port 8000```
 - To run with debug messages: ```adk web --log_level DEBUG```
+- To run the integration test:```python -m tests.test_agent```
 
 
 CONCEPTS USED
@@ -48,6 +49,7 @@ CONCEPTS USED
 - Context engineering: placeholders {final_events_summary}, etc.
 - LLM-powered agents: all subagents use Gemini models
 - Logging system (To activate, run: adk  web --log_level DEBUG)
+- Integration tests
 
 PROJECT STRUCTURE
 =====================
@@ -66,6 +68,7 @@ The project is organized as follows:
         - destination_weather_agent.py: Uses the weather_tool (which fecthes from open APIs) to find how the weather on a given time, in a city.
     - **trends/**: Finds the trends for the city
         - trends_agent.py: Agent using Official MCP server to Fetch (Web Scraping)
+ - **tests/**: Contains integration tests for the agent.
 
 
 WORKFLOW
