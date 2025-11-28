@@ -5,6 +5,24 @@ PROJECT OVERVIEW - NOMADMINDS
 This project consists in an extensible AI travel advisor using parallel research agents, iterative critique loops, and contextual aggregation to produce high-quality travel recommendations. 
 The agent is built using Google Agent Development Kit (ADK) and follows a modular architecture.
 
+PROBLEM STATEMENT
+=================
+Planning a trip typically requires gathering and synthesizing information from many different sources: events happening in the area, weather forecasts, safety considerations, cultural norms, transportation details, and personalized travel tips. Each of these tasks requires different types of data and reasoning, and doing them manually is time-consuming, repetitive, and prone to incomplete results.
+
+As travel becomes more spontaneous and dynamic, travelers need intelligent systems that can quickly research, filter, and summarize diverse information streams into actionable recommendations. The problem is interesting because it involves real-time data, multimodal reasoning, and coordination across multiple subtasks: an area where traditional single-prompt LLM tools are limited.
+
+My project attempts to build a travel assistant that can fully automate this workflow using a coordinated AI multi-agent system.
+
+
+SOLUTION STATEMENT
+==================
+To address the complexity of modern travel planning, we designed a coordinated multi-agent system that automates the full travel-research workflow. A single model prompt cannot efficiently manage the diverse subtasks involved—such as event discovery, weather forecasting, semantic retrieval of travel insights, and quality control—because each requires different tools, data sources, and reasoning styles.
+
+Our solution uses specialized agents, each equipped with its own instructions and tools, working together under the orchestration of a Root Agent.
+This architecture provides: parallelization, tool integration, iterative refinement, and shared context, which together create a modular, extensible, and robust system ideally suited for capturing and synthesizing the heterogeneous data sources required in travel planning.
+
+The resulting architecture—illustrated in the project diagram—centers on a Root Agent that coordinates a mix of parallel, sequential, and looping subprocesses. This design allows the system to automatically gather real-time event information, check weather conditions, surface personalized travel advice, ensure output quality, and assemble everything into cohesive recommendations.
+
 
 INSTALATION & CONFIGURATION
 ===========================
