@@ -10,7 +10,7 @@ INSTALATION & CONFIGURATION
 ===========================
 This project was built against Python 3.11.3.
 It is suggested you create a vitrual environment using your preferred tooling e.g. uv.
-Install dependenies -> check requirements.txt
+Install dependenies -> check [requirements.txt](https://github.com/sofiaisreis/NomadMinds/blob/master/requirements.txt)
 
 
 TO RUN
