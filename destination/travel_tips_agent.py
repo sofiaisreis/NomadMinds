@@ -17,7 +17,7 @@ retry_config=types.HttpRetryOptions(
 travel_tips_agent = LlmAgent(
     name="TravelTipsAgent",
     model=Gemini(
-        model="gemini-2.5-flash-lite",
+        model="gemini-2.5-flash",
         retry_options=retry_config
     ),
     instruction="""You are a specialized travel tips agent. Your only job is to use the

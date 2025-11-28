@@ -47,12 +47,15 @@ weather_tool = FunctionTool(
 weather_agent = LlmAgent(
     name="WeatherAgent",
     model=Gemini(
-        model="gemini-2.5-flash-lite",
+        model="gemini-2.5-flash",
         retry_options=retry_config
     ),
     instruction="""You are a specialized weather agent. Your only job is to use the
-    google_search tool to find how the weather is going to be, on a given time, on the given place or city
-    and present the weather findings with links to the respective event page.""",
+    google_search tool to find how the weather is going to be, on a given time, on the given contry or city that the user is travelling to.
+    They will indicate the location and date in their query.
+    If they only indicate the location, provide the current weather.
+    Use the weather_tool to get the weather information.
+    Present the findings in a concise manner.""",
     tools=[weather_tool],
     output_key="weather_findings",  # The result of this agent will be stored in the session state with this key.
 )
