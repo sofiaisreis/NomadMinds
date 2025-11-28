@@ -1,9 +1,10 @@
 PROJECT OVERVIEW - NOMADMINDS
 =============================
-<img width="1536" height="1024" alt="NomadMinds" src="https://github.com/user-attachments/assets/97d663bd-8a66-4744-916f-86a532c92f7b" />
-
 This project consists in an extensible AI travel advisor using parallel research agents, iterative critique loops, and contextual aggregation to produce high-quality travel recommendations. 
 The agent is built using Google Agent Development Kit (ADK) and follows a modular architecture.
+
+<img width="1536" height="1024" alt="NomadMinds" src="https://github.com/user-attachments/assets/97d663bd-8a66-4744-916f-86a532c92f7b" />
+
 
 PROBLEM STATEMENT
 =================
