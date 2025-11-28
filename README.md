@@ -1,4 +1,8 @@
 STARTUP:
+- Add .env file with:
+GOOGLE_GENAI_USE_VERTEXAI=0
+GOOGLE_API_KEY=<your-google-api-key> -> get it here: https://aistudio.google.com/api-keys
+
 - Activate a python environment, and install adk:
 python3 -m venv .venv &&
 source .venv/bin/activate &&
