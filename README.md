@@ -1,5 +1,15 @@
-Manual runner: python run.py
-ADK runner: adk run travel_assistant
+STARTUP:
+- Activate a python environment, and install adk:
+python3 -m venv .venv &&
+source .venv/bin/activate &&
+pip install google-adk &&
+pip install "httpx<0.28" &&
+pip install mcp-server-fetch
+
+TO RUN:
+- ADK runner: adk run travel_assistant
+- To run in local: adk web --port 8000
+- To run with debug messages: adk web --log_level DEBUG
 
 ARCHITECTURE
 ============
@@ -19,17 +29,33 @@ AggregatorAgent:
 - Uses the outputs from all parallel subagents via {placeholder} syntax.
 - Generates a single executive summary.
 
-Context flow:
-- Shared session context ensures outputs from parallel agents are available to the aggregator.
-- This allows seamless communication even though agents are in different files.
+Loop agent (travel_advisor_agent and travel_critique_agent):
+- The travel advisor calls the parallel agent
+- Then, the critique agent evaluates the ouput of the aggregator agent
+- If the content is good, it follows to the next step, otherwise we repeat the parallel flow
 
+Context engineer and Session:
+- Created a stateful agent using InMemorySessionService
+Shared session context ensures outputs from parallel agents are available to the aggregator.
+
+Logs:
+- Logs are enabled
+- To activate, run: adk  web --log_level DEBUG
+
+Using MCP:
+- Used MCP server to Fetch (Web scrapping)
+- https://github.com/modelcontextprotocol/servers?tab=readme-ov-file#%EF%B8%8F-official-integrations 
 
 CONCEPTS USED
 =============
-
-✅ Key exam points demonstrated by this workflow:
-- Multi-agent system: ParallelAgent + SequentialAgent
+- Multi-agent system: ParallelAgents + SequentialAgents + LoopAgents
 - Tools: AgentTool wrapping subagents
-- Sessions & Memory: shared context between agents
+- Sessions: shared context between agents
 - Context engineering: placeholders {final_events_summary}, etc.
 - LLM-powered agents: all subagents use Gemini models
+- Logging system
+
+======================
+Example queries to run:
+- Tell me what to do in lisbon from 27th november to 30 november 2025
+- What are the top 5 photo spots trending in Rome today?
