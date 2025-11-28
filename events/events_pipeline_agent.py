@@ -4,9 +4,11 @@
 #    3. Finally, it present the final summary clearly to the user as a response.
 
 from google.genai import types
-from google.adk.agents import SequentialAgent
-from .events_researcher_agent import events_researcher_agent
-from .summarizer_agent import summarizer_agent
+from google.adk.agents import SequentialAgent, LoopAgent
+from .research.events_researcher_agent import events_researcher_agent
+from .research.summarizer_agent import summarizer_agent
+from .reviewers.events_critique_agent import events_critique_agent
+from .reviewers.events_refiner_agent import events_refiner_agent
 
 print("✅ ADK components imported successfully.")
 
@@ -17,13 +19,16 @@ retry_config=types.HttpRetryOptions(
     http_status_codes=[429, 500, 503, 504] # Retry on these HTTP errors
 )
 
-
-# --- SequentialAgent ---
-# This agent orchestrates the pipeline by running the sub_agents in order.
-events_pipeline_agent = SequentialAgent(
-    name="EventsPipelineAgent",
-    # The agents will run in the order provided: event_researcher -> summarizer
-    sub_agents=[events_researcher_agent, summarizer_agent]
+# The LoopAgent contains the agents that will run repeatedly: Critic -> Refiner.
+events_refinement_loopAgent = LoopAgent(
+    name="EventsRefinementLoop",
+    sub_agents=[events_critique_agent, events_refiner_agent],
+    max_iterations=2,  # Prevents infinite loops
 )
 
-print("✅ Events pipeline agent defined.")
+
+# The events_pipeline_agent agent is a SequentialAgent that defines the overall workflow: Initial Write -> Summary -> Refinement Loop.
+events_pipeline_agent = SequentialAgent(
+    name="EventsPipelineAgent",
+    sub_agents=[events_researcher_agent, summarizer_agent, events_refinement_loopAgent],
+)
