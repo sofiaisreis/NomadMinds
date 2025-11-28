@@ -50,8 +50,9 @@ weather_agent = LlmAgent(
         model="gemini-2.5-flash",
         retry_options=retry_config
     ),
-    instruction="""You are a specialized weather agent. Your only job is to use the
-    google_search tool to find how the weather is going to be, on a given time, on the given contry or city that the user is travelling to.
+    instruction="""You are a specialized weather agent.
+    Your only job is to use the weather_tool to find how the weather is going to be, on a given time,
+    on the given contry or city that the user is travelling to.
     They will indicate the location and date in their query.
     If they only indicate the location, provide the current weather.
     Use the weather_tool to get the weather information.
