@@ -1,19 +1,24 @@
 STARTUP:
+- Get your google API key [here](https://aistudio.google.com/api-keys)
 - Add .env file with:
+```
 GOOGLE_GENAI_USE_VERTEXAI=0
-GOOGLE_API_KEY=<your-google-api-key> -> get it here: https://aistudio.google.com/api-keys
+GOOGLE_API_KEY=<your-google-api-key>
+```
 
 - Activate a python environment, and install adk:
+```
 python3 -m venv .venv &&
 source .venv/bin/activate &&
 pip install google-adk &&
 pip install "httpx<0.28" &&
 pip install mcp-server-fetch
+```
 
 TO RUN:
-- ADK runner: adk run travel_assistant
-- To run in local: adk web --port 8000
-- To run with debug messages: adk web --log_level DEBUG
+- ADK runner: ```adk run travel_assistant```
+- To run in local: ```adk web --port 8000```
+- To run with debug messages: ```adk web --log_level DEBUG```
 
 ARCHITECTURE
 ============
