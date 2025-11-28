@@ -76,3 +76,21 @@ CONCEPTS USED
 Example queries to run:
 - Tell me what to do in lisbon from 27th november to 30 november 2025
 - What are the top 5 photo spots trending in Rome today?
+
+PROJECT STRUCTURE
+=====================
+The project is organized as follows:
+ - travel_assistant/: The main Python package for the agent.
+     - agent.py: Defines the root_agent and the sub-agents orchestration
+     - events/: Contains the sub-agents responsible to gather the events summary
+         - events/research: reserchers of events
+            - events_researcher_agent.py: Using google search, finds pieces of relevant events on the given place/city for each day the user is traveling.
+            - summarizer_agent.py: Uses the outputkey from the researcher and creates a concise summary as a bulleted list.
+         - events/reviewers: reviewers of events
+            - events_critique_agent.py: A constructive travelling advisor critic that reviews the events suggestions proposal and marks it at APPROVED or not.
+            - events_refiner_agent.py: A refiner that takes the proposal list of events and the respective critique about the choice of events, providing updated where needed.
+         - events_pipeline_agent.py: Responsible to launch the pipeline of event gathering, summarization and to call the loop refiner agent.
+     - destination/: Contains the sub-agents responsible to gather the weather and travel tips
+        - destination_weather_agent.py: Uses the weather_tool (which fecthes from open APIs) to find how the weather on a given time, in a city.
+    - trends/: Finds the trends for the city
+        - trends_agent.py: Agent using Official MCP server to Fetch (Web Scraping)

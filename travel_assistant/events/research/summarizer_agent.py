@@ -20,7 +20,7 @@ summarizer_agent = LlmAgent(
     ),
     # The instruction is modified to request a bulleted list for a clear output format.
     instruction="""Read the provided research findings: {events_findings}
-Create a concise summary as a bulleted list with 3-5 key points about each event.""",
+        Create a concise summary as a bulleted list with 3-5 key points about each event.""",
     output_key="events_proposal",  # The result of this agent will be stored in the session state with this key.
 )
 
